@@ -1,0 +1,147 @@
+<div class="page-container" align="center">
+	<header class="app-header">
+		<div class="header-content">
+			<h2>Doença Cardíaca</h2>
+			<p>
+				Análise Exploratória de Dados (EDA) do
+				DATASET de saúde cardíaca.
+			</p>
+		</div>
+	</header>
+
+	<main class="main-content">
+		<div
+			class="status-container"
+			*ngIf="isLoading || error; else dashboardContent"
+		>
+			<div *ngIf="isLoading" class="loading-state">
+				<div class="spinner"></div>
+				<p>Analisando dados do CSV...</p>
+			</div>
+			<div *ngIf="error" class="error-state">
+				<h2>Erro ao Carregar Dashboard</h2>
+				<p>{{ error }}</p>
+			</div>
+		</div>
+
+		<ng-template #dashboardContent>
+			<div class="dashboard-container">
+				<div class="charts-grid">
+					<div class="card">
+						<h3 class="card-title">Proporção de Doença Cardíaca</h3>
+						<div class="chart-wrapper">
+							<canvas
+								*ngIf="proportionData"
+								baseChart
+								[data]="proportionData"
+								[options]="proportionOptions"
+								type="pie"
+							></canvas>
+						</div>
+						<div class="analysis-conclusion">
+							<p>{{ proportionConclusion }}</p>
+						</div>
+					</div>
+					<div class="card">
+						<h3 class="card-title">
+							Histograma de Idade dos Pacientes
+						</h3>
+						<div class="chart-wrapper">
+							<canvas
+								*ngIf="ageHistogramData"
+								baseChart
+								[data]="ageHistogramData"
+								[options]="ageHistogramOptions"
+								type="bar"
+							></canvas>
+						</div>
+						<div class="analysis-conclusion">
+							<p>{{ ageHistogramConclusion }}</p>
+						</div>
+					</div>
+
+					<div class="card">
+						<h3 class="card-title">Incidência vs. Sexo</h3>
+						<div class="chart-wrapper">
+							<canvas
+								*ngIf="sexIncidenceData"
+								baseChart
+								[data]="sexIncidenceData"
+								[options]="sexIncidenceOptions"
+								type="bar"
+							></canvas>
+						</div>
+						<div class="analysis-conclusion">
+							<p>{{ sexIncidenceConclusion }}</p>
+						</div>
+					</div>
+					<div class="card">
+						<h3 class="card-title">
+							Incidência vs. Tipo de Dor no Peito
+						</h3>
+						<div class="chart-wrapper">
+							<canvas
+								*ngIf="cpIncidenceData"
+								baseChart
+								[data]="cpIncidenceData"
+								[options]="cpIncidenceOptions"
+								type="bar"
+							></canvas>
+						</div>
+						<div class="analysis-conclusion">
+							<p>{{ cpIncidenceConclusion }}</p>
+						</div>
+					</div>
+
+					<div class="card landscape-card">
+						<h3 class="card-title">
+							Análise de Dor no Peito vs. Sexo
+						</h3>
+						<div class="chart-wrapper">
+							<canvas
+								*ngIf="sexCpIncidenceData"
+								baseChart
+								[data]="sexCpIncidenceData"
+								[options]="sexCpIncidenceOptions"
+								type="bar"
+							></canvas>
+						</div>
+						<div class="analysis-conclusion">
+							<p>{{ sexCpIncidenceConclusion }}</p>
+						</div>
+					</div>
+
+					<div class="card landscape-card">
+						<h3 class="card-title">
+							Idade vs. Frequência Cardíaca Máxima
+						</h3>
+						<div class="chart-wrapper">
+							<canvas
+								*ngIf="scatterData"
+								baseChart
+								[data]="scatterData"
+								[options]="scatterOptions"
+								type="scatter"
+							></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ng-template>
+	</main>
+
+	<footer class="app-footer">
+		<p>© DCA3501 - CIÊNCIA DE DADOS - Turma 2 </p>
+		<p>IVAMAR DANTAS ROQUE - MATHEUS ERICK BARROS COSTA DIAS DA SILVA</p>
+		<p>
+			Dataset disponível em:
+			<a
+				href="https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				Heart Disease Dataset
+			</a>
+		</p>
+	</footer>
+</div>

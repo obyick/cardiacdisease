@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+	selector: 'app-root',
+	standalone: true,
+	imports: [RouterOutlet],
+	templateUrl: './app.html',
+	styleUrls: ['./app.scss'],
 })
-export class App {
-  protected title = 'work_dashboard';
+export class AppComponent {
+	title = 'work_dashboard';
 }

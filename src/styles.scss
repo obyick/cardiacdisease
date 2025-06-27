@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+/* Reseta o básico */
+body,
+html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+	color: white;
+}
+
+body::before {
+	content: "";
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+
+	background-image: url("https://draanaraquelcardio.com.br/wp-content/uploads/2021/12/infarto.png");
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+
+	filter: brightness(0.3);
+}
