@@ -37,18 +37,17 @@
 		font-weight: 300;
 	}
 }
-/* Dentro do seu arquivo dashboard.component.scss */
 
 .app-footer {
 	a {
-	  color: var(--accent-color); // Usa a cor de destaque do tema
-	  text-decoration: none; // Remove o sublinhado padrão
+	  color: var(--accent-color);
+	  text-decoration: none;
 	  font-weight: 300;
 	  transition: color 0.2s ease-in-out;
 
 	  &:hover {
-		color: var(--text-primary-color); // Muda para branco ao passar o mouse
-		text-decoration: underline; // Adiciona sublinhado no hover
+		color: var(--text-primary-color);
+		text-decoration: underline;
 	  }
 	}
   }

@@ -49,7 +49,11 @@ export class DashboardComponent implements OnInit {
 
 	public sexCpIncidenceData: ChartData<'bar'> | undefined;
 	public sexCpIncidenceOptions: ChartConfiguration['options'] =
-		this.getCommonChartOptions(true, 'Tipo de Dor no Peito', 'Número de Casos');
+		this.getCommonChartOptions(
+			true,
+			'Tipo de Dor no Peito',
+			'Número de Casos'
+		);
 	public sexCpIncidenceConclusion = '';
 	public proportionData: ChartData<'pie'> | undefined;
 	public proportionOptions: ChartConfiguration['options'] =
@@ -57,7 +61,11 @@ export class DashboardComponent implements OnInit {
 	public proportionConclusion = '';
 	public ageHistogramData: ChartData<'bar'> | undefined;
 	public ageHistogramOptions: ChartConfiguration['options'] =
-		this.getCommonChartOptions(false, 'Faixa Etária', 'Número de Pacientes');
+		this.getCommonChartOptions(
+			false,
+			'Faixa Etária',
+			'Número de Pacientes'
+		);
 	public ageHistogramConclusion = '';
 	public sexIncidenceData: ChartData<'bar'> | undefined;
 	public sexIncidenceOptions: ChartConfiguration['options'] =
@@ -320,16 +328,13 @@ export class DashboardComponent implements OnInit {
 			'Assintomático',
 		];
 
-		// Filtra dados apenas de pacientes com doença cardíaca
 		const diseasedData = data.filter((p) => p.target === 1);
 
-		// Mapeia os casos por tipo de dor para homens
 		const menData = cpLabels.map(
 			(_, i) =>
 				diseasedData.filter((p) => p.sex === 1 && p.cp === i).length
 		);
 
-		// Mapeia os casos por tipo de dor para mulheres
 		const womenData = cpLabels.map(
 			(_, i) =>
 				diseasedData.filter((p) => p.sex === 0 && p.cp === i).length
@@ -341,17 +346,16 @@ export class DashboardComponent implements OnInit {
 				{
 					label: 'Homens',
 					data: menData,
-					backgroundColor: '#3498db', // Cor para homens
+					backgroundColor: '#3498db',
 				},
 				{
 					label: 'Mulheres',
 					data: womenData,
-					backgroundColor: '#e91e63', // Cor para mulheres
+					backgroundColor: '#e91e63',
 				},
 			],
 		};
 
-		// Gera uma conclusão simples
 		this.sexCpIncidenceConclusion =
 			'O gráfico demonstra a distribuição de casos por tipo de dor no peito, segmentado por sexo, permitindo uma comparação direta da sintomatologia entre os gêneros.';
 	}
