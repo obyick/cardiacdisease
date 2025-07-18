@@ -11,29 +11,36 @@
 	flex-shrink: 0; // Impede que o header encolha
 }
 
+.main-container {
+	display: flex;
+	flex-grow: 1;
+	overflow: hidden; /* Evita barras de rolagem desnecessárias */
+}
+
 .app-main {
 	display: flex;
 	flex-grow: 1; // Faz a área principal crescer para ocupar o espaço disponível
 	overflow: hidden; // Previne barras de rolagem duplas
+	overflow-y: auto; /* Permite rolagem apenas no conteúdo principal */
 }
 
 .app-sidebar {
-	flex-basis: 240px; // Largura fixa para a sidebar
+	flex-basis: 20%; // Largura fixa para a sidebar
 	flex-shrink: 0; // Impede que a sidebar encolha
 	overflow-y: auto; // Adiciona scroll apenas na sidebar se necessário
-	background-color: rgba(
-		13,
-		17,
-		23,
-		0.5
-	); // Cor de fundo levemente diferente
+	background-color: rgba(13, 17, 23, 0.5); // Cor de fundo levemente diferente
 	border-right: 1px solid var(--color-border);
+	position: relative; // Garante que o z-index funcione
+	z-index: 10; // Coloca a sidebar em uma camada superior
 }
 
 .app-body {
 	flex-grow: 1; // O corpo principal ocupa todo o espaço restante
 	overflow-y: auto; // ESTA é a área que terá a barra de rolagem principal
 	padding: 2rem; // Adiciona um respiro interno
+	// --- GARANTIA DE POSICIONAMENTO ---
+	position: relative;
+	z-index: 5; // Garante que o corpo fique abaixo da sidebar
 }
 
 .app-footer {

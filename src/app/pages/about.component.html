@@ -1,0 +1,131 @@
+<div class="about-container">
+	<div class="about-content">
+		<h1>Análise de Perfis de Pacientes com Risco Cardíaco</h1>
+		<p class="subtitle">
+			Uma aplicação de Ciência de Dados para descoberta de padrões através
+			de Machine Learning não supervisionado.
+		</p>
+		<div class="highlights-container">
+			<div class="highlight-card">
+				<strong>Análise de Cluster</strong>
+				<span>Uso de K-Means para segmentar perfis de pacientes.</span>
+			</div>
+			<div class="highlight-card">
+				<strong>Visualização 2D</strong>
+				<span
+					>Redução de dimensionalidade com PCA para
+					visualização.</span
+				>
+			</div>
+			<div class="highlight-card">
+				<strong>Stack Moderno</strong>
+				<span>Construído com Angular, TypeScript e Chart.js.</span>
+			</div>
+		</div>
+		<section>
+			<h2>Visão Geral e Objetivos</h2>
+			<p>
+				Este projeto consiste em um dashboard interativo, desenvolvido
+				para explorar um conjunto de dados clínicos sobre doenças
+				cardíacas. O objetivo central não é prever um diagnóstico, mas
+				sim aplicar técnicas de
+				<strong>aprendizado de máquina não supervisionado</strong> para
+				identificar e caracterizar grupos distintos de pacientes
+				(clusters) com perfis semelhantes.
+			</p>
+			<p>A aplicação busca responder a perguntas estratégicas, como:</p>
+			<ul>
+				<li>
+					Existem agrupamentos naturais de pacientes com base em suas
+					características clínicas?
+				</li>
+				<li>Quais são os perfis que definem cada um desses grupos?</li>
+				<li>
+					Como esses perfis se distribuem em relação a fatores
+					demográficos e sintomáticos?
+				</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Metodologia e Pipeline de Dados</h2>
+			<p>
+				O núcleo do projeto é um serviço de análise que executa um
+				pipeline de Machine Learning, implementado em TypeScript:
+			</p>
+			<ul>
+				<li>
+					<strong>Pré-processamento:</strong>
+					Os dados são normalizados através da
+					<strong>padronização (Z-score)</strong>. Este passo é
+					fundamental para que o algoritmo K-Means trate todas as
+					características com igual importância, independentemente de
+					sua escala original.
+				</li>
+				<li>
+					<strong>Clusterização (K-Means):</strong>
+					O algoritmo <strong>K-Means</strong> foi implementado para
+					segmentar os pacientes em
+					<strong>3 clusters distintos</strong>, agrupando-os com base
+					em 10 características clínicas, como idade, pressão
+					arterial, colesterol e frequência cardíaca.
+				</li>
+				<li>
+					<strong>Redução de Dimensionalidade (PCA):</strong>
+					Para visualizar os clusters, a técnica de
+					<strong>Análise de Componentes Principais (PCA)</strong>
+					foi utilizada para reduzir as 10 dimensões dos dados a
+					apenas duas, permitindo a plotagem em um gráfico de
+					dispersão 2D sem perda significativa de informação sobre a
+					variância.
+				</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Arquitetura e Tecnologias</h2>
+			<p>
+				A aplicação foi desenvolvida com tecnologias modernas, visando
+				performance, manutenibilidade e uma rica experiência de usuário:
+			</p>
+			<ul>
+				<li>
+					<strong>Framework Frontend:</strong>
+					<strong>Angular</strong>, com a lógica dos componentes
+					escrita em <strong>TypeScript</strong>.
+				</li>
+				<li>
+					<strong>Visualização de Dados:</strong>
+					Gráficos dinâmicos e interativos renderizados com a
+					biblioteca <strong>Chart.js</strong> (via ng2-charts).
+				</li>
+				<li>
+					<strong>Computação Matemática:</strong>
+					A biblioteca <strong>Math.js</strong> foi utilizada para as
+					operações de álgebra linear necessárias nas implementações
+					customizadas de K-Means e PCA.
+				</li>
+				<li>
+					<strong>Estilização:</strong>
+					A interface foi construída com
+					<strong>SCSS</strong>, utilizando variáveis, Flexbox e Grid
+					Layout para criar um design responsivo, temático (dark mode)
+					e com elementos em "glassmorphism".
+				</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Conclusão</h2>
+			<p>
+				Este projeto demonstra com sucesso um pipeline completo de
+				ciência de dados, transformando dados brutos em insights visuais
+				e acionáveis. Ao identificar arquétipos de pacientes, a
+				ferramenta serve como um poderoso exemplo de como o aprendizado
+				não supervisionado pode ser usado para análise exploratória e
+				descoberta de conhecimento em datasets complexos no campo da
+				saúde.
+			</p>
+		</section>
+	</div>
+</div>

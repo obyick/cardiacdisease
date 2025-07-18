@@ -1,0 +1,116 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: "Roboto", sans-serif;
+	gap: 0.5rem;
+	display: flexbox;
+	color: var(--color-primary-text);
+}
+
+/* Estilos para o container principal */
+.dados-brutos-container {
+	max-width: 1200px;
+	margin: 2rem auto;
+	padding: 2.5rem;
+	background-color: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: var(--border-radius);
+	box-shadow: var(--card-shadow);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+}
+
+h2 {
+	color: var(--color-primary-text);
+	border-bottom: 2px solid var(--color-accent);
+	padding-bottom: 0.75rem;
+	margin-bottom: 1.5rem;
+	font-weight: 500;
+}
+
+/* Layout de duas colunas usando Grid */
+.atributos-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 1.25rem;
+}
+
+/* Estilos para cada banner de atributo */
+.atributo-banner {
+	background-color: rgba(13, 17, 23, 0.7);
+	padding: 1.25rem;
+	border-radius: calc(var(--border-radius) / 2);
+	color: var(--color-secondary-text);
+	font-size: 0.95rem;
+	line-height: 1.5;
+	display: flex;
+	flex-direction: column;
+
+	strong {
+		color: var(--color-primary-text);
+		font-weight: 600;
+		font-size: 1rem;
+		margin-bottom: 0.75rem;
+	}
+}
+
+/* Container para as badges de opções */
+.opcoes-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+/* Estilo base para cada badge */
+.opcao-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.2rem 0.6rem;
+	border-radius: 999px;
+	font-size: 0.8rem;
+	font-weight: 500;
+	line-height: 1.5;
+	white-space: nowrap;
+
+	b {
+		display: inline-block;
+		padding: 0.1rem 0.4rem;
+		border-radius: 999px;
+		margin-right: 0.4rem;
+		font-size: 0.75rem;
+	}
+}
+
+/* Variação de cor: Positivo/Alerta */
+.opcao-badge--positivo {
+	background-color: rgba(231, 76, 60, 0.15);
+	color: #ff8c82;
+
+	b {
+		background-color: #e74c3c;
+		color: #ffffff;
+	}
+}
+
+/* Variação de cor: Negativo/Normal */
+.opcao-badge--negativo {
+	background-color: rgba(52, 152, 219, 0.15);
+	color: #80b9ff;
+
+	b {
+		background-color: #3498db;
+		color: #ffffff;
+	}
+}
+
+/* Variação de cor: Neutro/Informativo */
+.opcao-badge--neutro {
+	background-color: rgba(139, 148, 158, 0.15);
+	color: #a1aab4;
+
+	b {
+		background-color: #8b949e;
+		color: #ffffff;
+	}
+}

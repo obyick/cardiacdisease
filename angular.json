@@ -17,20 +17,30 @@
 				"build": {
 					"builder": "@angular/build:application",
 					"options": {
+						"outputPath": "dist/work_dashboard",
 						"browser": "src/main.ts",
 						"polyfills": ["zone.js"],
 						"tsConfig": "tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
 						"assets": ["src/favicon.ico", "src/assets"],
-						"styles": ["src/styles.scss"]
+						"styles": ["src/styles.scss"],
+						"allowedCommonJsDependencies": [
+							"papaparse",
+							"plotly.js-dist-min",
+							"mathjs",
+							"seedrandom",
+							"tiny-emitter",
+							"escape-latex",
+							"javascript-natural-sort"
+						]
 					},
 					"configurations": {
 						"production": {
 							"budgets": [
 								{
 									"type": "initial",
-									"maximumWarning": "500kB",
-									"maximumError": "1MB"
+									"maximumWarning": "2mb",
+									"maximumError": "6mb"
 								},
 								{
 									"type": "anyComponentStyle",
@@ -77,6 +87,9 @@
 						],
 						"styles": ["src/styles.scss"]
 					}
+				},
+				"deploy": {
+					"builder": "angular-cli-ghpages:deploy"
 				}
 			}
 		}

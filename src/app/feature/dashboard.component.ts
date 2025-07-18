@@ -114,13 +114,11 @@ export class DashboardComponent implements OnInit {
 			if (!rawData || rawData.length === 0) {
 				throw new Error('Os dados do CSV estão vazios.');
 			}
-			// A Mágica do ML acontece aqui!
 			const clusteredData = await this.clusteringService.runAnalysis(
 				rawData,
 				this.NUM_CLUSTERS
 			);
 
-			// Geração dos novos gráficos e adaptação dos antigos
 			this.createClusterPcaChart(clusteredData);
 			this.createClusterProfileChart(clusteredData);
 			this.createProportionChart(clusteredData);
@@ -137,7 +135,7 @@ export class DashboardComponent implements OnInit {
 	}
 
 	private async loadCsvData(): Promise<HeartData[]> {
-		const response = await fetch('../../assets/heart.csv');
+		const response = await fetch('assets/heart.csv');
 		if (!response.ok)
 			throw new Error(
 				`Arquivo não encontrado (Erro: ${response.statusText})`
@@ -166,20 +164,40 @@ export class DashboardComponent implements OnInit {
 		});
 	}
 
-	// --- NOVOS GRÁFICOS DE MACHINE LEARNING ---
+	// --- GRÁFICOS DE MACHINE LEARNING ---
 
 	createClusterPcaChart(data: HeartDataWithCluster[]): void {
 		this.clusterPcaData = {
 			datasets: Array.from({ length: this.NUM_CLUSTERS }, (_, i) => {
-				const clusterPoints = data
-					.filter((p) => p.cluster === i)
-					.map((p) => p.pca);
+				const clusterSubset = data.filter((p) => p.cluster === i);
+				const clusterPoints = clusterSubset.map((p) => ({
+					x: p.pca.x,
+					y: p.pca.y,
+					originalData: p, // Anexa os dados originais a cada ponto
+				}));
 				return {
 					data: clusterPoints,
 					label: `Cluster ${i}`,
 					backgroundColor: this.CLUSTER_COLORS[i],
 				};
 			}),
+		};
+
+		// Configura o tooltip (hover) para mostrar os dados originais
+		this.clusterPcaOptions!.plugins!.tooltip!.callbacks = {
+			label: (context: any) => {
+				const originalData = context.raw.originalData;
+				if (!originalData) {
+					return context.dataset.label || '';
+				}
+				const lines = [
+					`Cluster: ${originalData.cluster}`,
+					`Idade: ${originalData.age}`,
+					`Sexo: ${originalData.sex === 1 ? 'Homem' : 'Mulher'}`,
+					`Colesterol: ${originalData.chol}`,
+				];
+				return lines;
+			},
 		};
 	}
 
@@ -208,13 +226,30 @@ export class DashboardComponent implements OnInit {
 			datasets.push({
 				label: `Cluster ${i}`,
 				data: avgValues,
-				backgroundColor: `${this.CLUSTER_COLORS[i]}40`, // Cor com transparência
 				borderColor: this.CLUSTER_COLORS[i],
 				pointBackgroundColor: this.CLUSTER_COLORS[i],
+				borderWidth: 2, // Apenas a linha, sem preenchimento
 			});
 		}
 
 		this.clusterProfileData = { labels: profileFeatures, datasets };
+
+		// Configurações de estilo para o eixo do gráfico de radar
+		this.clusterProfileOptions!.scales = {
+			r: {
+				grid: { color: 'rgba(255, 255, 255, 0.15)' },
+				angleLines: { color: 'rgba(255, 255, 255, 0.15)' },
+				pointLabels: {
+					color: '#ffffff',
+					font: { size: 13 },
+				},
+				ticks: {
+					color: 'rgba(255, 255, 255, 0.85)',
+					backdropColor: 'transparent',
+				},
+			},
+		};
+
 		this.clusterProfileOptions!.plugins!.tooltip!.callbacks = {
 			label: (context) =>
 				`${context.dataset.label}: ${Number(context.raw).toFixed(2)}`,
@@ -258,13 +293,11 @@ export class DashboardComponent implements OnInit {
 		});
 
 		this.ageHistogramData = { labels: ageGroups, datasets };
-
 		const specificOptions = this.getCommonChartOptions(
 			true,
 			'Faixa Etária',
 			'Número de Pacientes'
 		);
-		// Adicionado "!" para garantir que não é undefined
 		specificOptions!.scales = {
 			...specificOptions!.scales,
 			x: { ...specificOptions!.scales?.['x'], stacked: true },
@@ -277,7 +310,7 @@ export class DashboardComponent implements OnInit {
 		const labels = ['Homens', 'Mulheres'];
 		const datasets = Array.from({ length: this.NUM_CLUSTERS }, (_, i) => ({
 			label: `Cluster ${i}`,
-			data: [0, 0], // [homens, mulheres]
+			data: [0, 0],
 			backgroundColor: this.CLUSTER_COLORS[i],
 		}));
 
@@ -287,8 +320,6 @@ export class DashboardComponent implements OnInit {
 		});
 
 		this.sexIncidenceData = { labels, datasets };
-
-		// Define as opções incluindo 'stacked' diretamente
 		const specificOptions = this.getCommonChartOptions(
 			true,
 			'Sexo',
@@ -318,8 +349,6 @@ export class DashboardComponent implements OnInit {
 		data.forEach((p) => datasets[p.cluster].data[p.cp]++);
 
 		this.cpIncidenceData = { labels, datasets };
-
-		// Define as opções incluindo 'stacked' diretamente
 		const specificOptions = this.getCommonChartOptions(
 			true,
 			'Tipo de Dor no Peito',

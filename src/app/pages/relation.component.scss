@@ -1,0 +1,60 @@
+// 1. Contêiner Principal com Efeito Glassmorphism
+
+.relation-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem; // Padronizado com o .chart-wrapper
+
+  // Utiliza as mesmas variáveis de estilo do .card para consistência
+  background: var(--color-surface); // Fundo semitransparente
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+
+  // Altura calculada para preencher o espaço vertical disponível
+  height: calc(100vh - 180px); // Ajuste o valor 180px se necessário
+}
+
+// 2. Controles de Seleção
+.controls {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0; // Impede que os controles encolham
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-secondary-text);
+  }
+
+  select {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--color-border);
+    background-color: grey; // Fundo mais sutil
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+
+    &:hover {
+        border-color: var(--color-accent);
+    }
+  }
+}
+
+// 3. Contêiner do Gráfico
+.chart-container {
+  width: 100%;
+  flex-grow: 1; // Garante que o gráfico ocupe o espaço restante
+  min-height: 0; // Essencial para o flex-grow funcionar corretamente em layouts complexos
+}
