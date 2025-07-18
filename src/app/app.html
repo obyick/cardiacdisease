@@ -1,19 +1,13 @@
-<div class="app-container">
-	<header class="app-header">
-		<app-header></app-header>
-	</header>
+<div class="app-layout-container">
+	<app-header></app-header>
 
-	<main class="app-main">
-		<aside class="app-sidebar">
-			<app-sidebar></app-sidebar>
-		</aside>
+	<div class="main-content-wrapper">
+		<app-sidebar></app-sidebar>
 
-		<section class="app-body">
+		<main class="content-scroll-area">
 			<router-outlet></router-outlet>
-		</section>
-	</main>
+		</main>
+	</div>
 
-	<footer class="app-footer">
-		<app-footer></app-footer>
-	</footer>
+	<app-footer></app-footer>
 </div>

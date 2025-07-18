@@ -1,48 +1,33 @@
-/* app.component.scss (Layout da Aplicação) */
-
-// O seletor :host garante que os estilos se apliquem ao componente principal do app.
-:host {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh; // Garante que o container ocupe 100% da altura da tela
+// Trava o layout principal na altura da tela e remove a rolagem do body
+.app-layout-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden; // CRÍTICO: Impede a rolagem principal
 }
 
-.app-header {
-	flex-shrink: 0; // Impede que o header encolha
+// Garante que o header e o footer não encolham
+app-header,
+app-footer {
+  flex-shrink: 0;
 }
 
-.main-container {
-	display: flex;
-	flex-grow: 1;
-	overflow: hidden; /* Evita barras de rolagem desnecessárias */
+// Container que segura a sidebar e o conteúdo
+.main-content-wrapper {
+  display: flex;
+  flex-grow: 1; // Ocupa todo o espaço vertical disponível
+  overflow: hidden; // Impede que este container role
 }
 
-.app-main {
-	display: flex;
-	flex-grow: 1; // Faz a área principal crescer para ocupar o espaço disponível
-	overflow: hidden; // Previne barras de rolagem duplas
-	overflow-y: auto; /* Permite rolagem apenas no conteúdo principal */
+app-sidebar {
+  flex-basis: 260px; // Largura da sua sidebar
+  flex-shrink: 0;
+  overflow-y: auto; // Permite que a sidebar tenha sua própria rolagem se necessário
 }
 
-.app-sidebar {
-	flex-basis: 20%; // Largura fixa para a sidebar
-	flex-shrink: 0; // Impede que a sidebar encolha
-	overflow-y: auto; // Adiciona scroll apenas na sidebar se necessário
-	background-color: rgba(13, 17, 23, 0.5); // Cor de fundo levemente diferente
-	border-right: 1px solid var(--color-border);
-	position: relative; // Garante que o z-index funcione
-	z-index: 10; // Coloca a sidebar em uma camada superior
-}
-
-.app-body {
-	flex-grow: 1; // O corpo principal ocupa todo o espaço restante
-	overflow-y: auto; // ESTA é a área que terá a barra de rolagem principal
-	padding: 2rem; // Adiciona um respiro interno
-	// --- GARANTIA DE POSICIONAMENTO ---
-	position: relative;
-	z-index: 5; // Garante que o corpo fique abaixo da sidebar
-}
-
-.app-footer {
-	flex-shrink: 0; // Impede que o footer encolha
+// A área de conteúdo que efetivamente rolará
+.content-scroll-area {
+  flex-grow: 1;
+  overflow-y: auto; // CRÍTICO: Esta é a única área com rolagem vertical
+  padding: 2rem; // Adiciona um respiro interno
 }

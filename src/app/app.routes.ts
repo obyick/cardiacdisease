@@ -30,7 +30,7 @@ export const routes: Routes = [
 	// Rota padrão para redirecionar o usuário quando ele entra na raiz do site
 	{
 		path: '',
-		redirectTo: '/dashboard',
+		redirectTo: '/about',
 		pathMatch: 'full',
 	},
 ];
