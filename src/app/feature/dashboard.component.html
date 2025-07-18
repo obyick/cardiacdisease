@@ -1,0 +1,197 @@
+<div class="page-container" align="center">
+	<main class="main-content">
+		<div
+			class="status-container"
+			*ngIf="isLoading || error; else dashboardContent"
+		>
+			<div *ngIf="isLoading" class="loading-state">
+				<div class="spinner"></div>
+				<p>Analisando dados e aplicando Machine Learning...</p>
+				<small
+					>Agrupando pacientes com K-Means e reduzindo
+					dimensionalidade com PCA.</small
+				>
+			</div>
+			<div *ngIf="error" class="error-state">
+				<h2>Erro ao Carregar Dashboard</h2>
+				<p>{{ error }}</p>
+			</div>
+		</div>
+
+		<ng-template #dashboardContent>
+			<div class="dashboard-container">
+				<div class="charts-grid">
+					<div class="card landscape-card">
+						<h3 class="card-title">
+							Visualização dos Clusters de Pacientes (PCA)
+						</h3>
+						<div class="chart-wrapper">
+							<canvas
+								*ngIf="clusterPcaData"
+								baseChart
+								[data]="clusterPcaData"
+								[options]="clusterPcaOptions"
+								type="scatter"
+							></canvas>
+						</div>
+						<div class="analysis-conclusion">
+							<h4>Como Interpretar este Gráfico:</h4>
+							<p>
+								Este gráfico utiliza a
+								<strong>
+									Análise de Componentes Principais (PCA)
+								</strong>
+								, uma técnica de Machine Learning, para
+								condensar 10 características clínicas de cada
+								paciente em apenas duas dimensões visuais (os
+								eixos X e Y). Cada ponto representa um paciente,
+								colorido de acordo com o cluster (grupo) ao
+								qual o algoritmo
+								<strong>K-Means</strong>
+								o atribuiu. A separação visual entre os grupos
+								sugere que os perfis de pacientes encontrados
+								são, de fato, distintos entre si.
+							</p>
+						</div>
+					</div>
+
+					<div class="card landscape-card">
+						<h3 class="card-title">Perfil Clínico dos Clusters</h3>
+						<div class="chart-wrapper">
+							<canvas
+								*ngIf="clusterProfileData"
+								baseChart
+								[data]="clusterProfileData"
+								[options]="clusterProfileOptions"
+								type="radar"
+							></canvas>
+						</div>
+						<div class="analysis-conclusion">
+							<h4>Como Interpretar este Gráfico:</h4>
+							<p>
+								O gráfico de radar delineia o "perfil clínico
+								médio" de cada cluster. Cada eixo representa uma
+								métrica clínica chave (idade, colesterol, etc.),
+								e a linha colorida mostra o valor médio para os
+								pacientes daquele grupo. Isso nos permite
+								entender as características dominantes de cada
+								cluster. Por exemplo, um cluster pode agregar
+								pacientes mais velhos com colesterol mais alto,
+								enquanto outro pode agrupar pacientes mais
+								jovens com frequência cardíaca máxima (thalach)
+								elevada.
+							</p>
+						</div>
+					</div>
+
+					<div class="card">
+						<h3 class="card-title">Proporção dos Clusters</h3>
+						<div class="chart-wrapper">
+							<canvas
+								*ngIf="proportionData"
+								baseChart
+								[data]="proportionData"
+								[options]="proportionOptions"
+								type="pie"
+							></canvas>
+						</div>
+						<div class="analysis-conclusion">
+							<h4>Como Interpretar este Gráfico:</h4>
+							<p>
+								Este gráfico de pizza ilustra a distribuição
+								percentual dos pacientes entre os três clusters
+								identificados pelo K-Means. Ele responde à
+								pergunta: "Qual o tamanho de cada grupo de
+								pacientes?". Uma distribuição desbalanceada pode
+								indicar que um perfil de risco específico é mais
+								comum ou raro na população analisada.
+							</p>
+						</div>
+					</div>
+
+					<div class="card">
+						<h3 class="card-title">
+							Clusters por Faixa Etária (Histograma)
+						</h3>
+						<div class="chart-wrapper">
+							<canvas
+								*ngIf="ageHistogramData"
+								baseChart
+								[data]="ageHistogramData"
+								[options]="ageHistogramOptions"
+								type="bar"
+							></canvas>
+						</div>
+						<div class="analysis-conclusion">
+							<h4>Como Interpretar este Gráfico:</h4>
+							<p>
+								Este histograma empilhado detalha a composição
+								de cada faixa etária pelos diferentes clusters.
+								Em vez de apenas mostrar o total de pacientes,
+								ele revela quais perfis (clusters) são
+								predominantes em cada fase da vida. Podemos
+								observar, por exemplo, se o "Cluster 0" é mais
+								comum entre pacientes de 60-69 anos.
+							</p>
+						</div>
+					</div>
+
+					<div class="card">
+						<h3 class="card-title">
+							Distribuição dos Clusters por Sexo
+						</h3>
+						<div class="chart-wrapper">
+							<canvas
+								*ngIf="sexIncidenceData"
+								baseChart
+								[data]="sexIncidenceData"
+								[options]="sexIncidenceOptions"
+								type="bar"
+							></canvas>
+						</div>
+						<div class="analysis-conclusion">
+							<h4>Como Interpretar este Gráfico:</h4>
+							<p>
+								Este gráfico de barras empilhadas analisa a
+								prevalência de cada cluster entre os sexos (onde
+								1 representa o sexo masculino e 0, o feminino).
+								Ele permite identificar se certos perfis
+								clínicos agrupados pelo K-Means estão mais
+								associados a um sexo específico, ajudando a
+								entender como as características de risco variam
+								entre homens e mulheres.
+							</p>
+						</div>
+					</div>
+
+					<div class="card">
+						<h3 class="card-title">
+							Clusters por Tipo de Dor no Peito
+						</h3>
+						<div class="chart-wrapper">
+							<canvas
+								*ngIf="cpIncidenceData"
+								baseChart
+								[data]="cpIncidenceData"
+								[options]="cpIncidenceOptions"
+								type="bar"
+							></canvas>
+						</div>
+						<div class="analysis-conclusion">
+							<h4>Como Interpretar este Gráfico:</h4>
+							<p>
+								Demonstra a relação entre os clusters e os tipos
+								de dor no peito (0: Angina Típica, 1: Atípica, 2:
+								Não Anginosa, 3: Assintomático). Ao analisar as
+								barras, podemos inferir se um determinado tipo
+								de dor é um sintoma característico de um dos
+								perfis de pacientes, fornecendo insights
+								clínicos sobre a sintomatologia de cada grupo.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ng-template>
+	</main>
+</div>

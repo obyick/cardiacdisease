@@ -1,4 +1,22 @@
-/* Reseta o básico */
+* {
+	text-decoration: none;
+	box-sizing: border-box;
+}
+
+:root {
+	--color-background: #0d1117; // Fundo escuro, inspirado no espaço
+	--color-surface: rgba(22, 27, 34, 0.7); // Superfície para os cards, com transparência
+	--color-border: rgba(255, 255, 255, 0.15); // Borda sutil
+	--color-primary-text: #e6edf3; // Texto principal
+	--color-secondary-text: #8b949e; // Texto de apoio
+	--color-accent: #58a6ff; // Cor de destaque para links e gráficos
+	--color-accent-hover: #80b9ff; // Hover da cor de destaque
+
+	--font-main: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+	--border-radius: 12px;
+	--card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
 body,
 html {
 	margin: 0;

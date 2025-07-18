@@ -1,0 +1,41 @@
+/* app.component.scss (Layout da Aplicação) */
+
+// O seletor :host garante que os estilos se apliquem ao componente principal do app.
+:host {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh; // Garante que o container ocupe 100% da altura da tela
+}
+
+.app-header {
+	flex-shrink: 0; // Impede que o header encolha
+}
+
+.app-main {
+	display: flex;
+	flex-grow: 1; // Faz a área principal crescer para ocupar o espaço disponível
+	overflow: hidden; // Previne barras de rolagem duplas
+}
+
+.app-sidebar {
+	flex-basis: 240px; // Largura fixa para a sidebar
+	flex-shrink: 0; // Impede que a sidebar encolha
+	overflow-y: auto; // Adiciona scroll apenas na sidebar se necessário
+	background-color: rgba(
+		13,
+		17,
+		23,
+		0.5
+	); // Cor de fundo levemente diferente
+	border-right: 1px solid var(--color-border);
+}
+
+.app-body {
+	flex-grow: 1; // O corpo principal ocupa todo o espaço restante
+	overflow-y: auto; // ESTA é a área que terá a barra de rolagem principal
+	padding: 2rem; // Adiciona um respiro interno
+}
+
+.app-footer {
+	flex-shrink: 0; // Impede que o footer encolha
+}
